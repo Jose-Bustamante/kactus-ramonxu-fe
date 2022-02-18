@@ -1,9 +1,12 @@
 import React from 'react';
 import Box from '@mui/material/Box';
+import Todo from '../../components/Todo';
 
 function Todos() {
   return (
-    <Box>bla</Box>
+    <Box sx={{ overflow: 'auto' }}>
+      <Todo />
+    </Box>
   );
 }
 
