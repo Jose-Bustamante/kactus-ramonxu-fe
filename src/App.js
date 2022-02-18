@@ -4,6 +4,10 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query';
 import './App.css';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -25,38 +29,42 @@ const theme = createTheme({
   },
 });
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Ramonxu web app
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </Box>
-      <CssBaseline />
-      <Container maxWidth="xl">
-        <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }}>
-          <Router>
-            <Routes>
-              <Route path="" element={<Todos />} />
-            </Routes>
-          </Router>
-        </Box>
-      </Container>
+      <QueryClientProvider client={queryClient}>
 
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="fixed">
+            <Toolbar>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                Ramonxu web app
+              </Typography>
+            </Toolbar>
+          </AppBar>
+        </Box>
+        <CssBaseline />
+        <Container maxWidth="xl">
+          <Box sx={{ bgcolor: '#cfe8fc', height: '100vh', marginTop: '65px' }}>
+            <Router>
+              <Routes>
+                <Route path="" element={<Todos />} />
+              </Routes>
+            </Router>
+          </Box>
+        </Container>
+      </QueryClientProvider>
     </ThemeProvider>
 
   );
